@@ -3,13 +3,11 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 const userData = [{
-    id : 1,
-      name : "a",
+    email : "a2@gmail.com",
       password : "ab1"
   },
   {
-    id : 2,
-    name : "b",
+    email : "a3@gmail.com",
     password : "ab2"
 }
 ];

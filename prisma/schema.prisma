@@ -7,17 +7,46 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Role {
+  type          String      @unique
+  users         User[]
+  permissions   Permissions @relation(fields: [permissionsId], references: [id])
+  permissionsId Int
+}
+
+model Permissions {
+  id               Int     @id @unique @default(autoincrement())
+  canUpdatePost    Boolean @default(false)
+  canDisableUser   Boolean @default(false)
+  canEnableUser    Boolean @default(false)
+  canDeletePost    Boolean @default(false)
+  canDeleteAnyPost Boolean @default(false)
+  canReadPosts     Boolean @default(false)
+  canUploadImages  Boolean @default(false)
+  canCreatePost    Boolean @default(false)
+  Role             Role[]
+}
+
 model User {
-  id       Int    @id @unique
-  name     String
-  password String @db.VarChar(1000)
-  posts    Post[]
+  email     String    @id @unique
+  password  String    @db.VarChar(1000)
+  isActive  Boolean   @default(true)
+  createdAt DateTime? @default(now())
+  role      Role?     @relation(fields: [roleType], references: [type])
+  roleType  String?
+  posts     Post[]
 }
 
 model Post {
-  id          Int    @id @unique
+  id          Int       @id @unique
   title       String
-  description String @db.VarChar(1000)
-  user        User   @relation(fields: [user_id], references: [id])
-  user_id     Int
+  isDeleted   Boolean   @default(false)
+  description String    @db.VarChar(1000)
+  imageSrc    String
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @default(now())
+  deletedAt   DateTime? @default(now())
+  deletedBy   String?
+  user        User      @relation(fields: [user_id], references: [email])
+  user_id     String
 }
