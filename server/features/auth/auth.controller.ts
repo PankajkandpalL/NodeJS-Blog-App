@@ -22,14 +22,14 @@ class AuthController{
             if(doUserExists?.roleType)
             {
                 const token = createNewUserToken({ email : doUserExists.email, role : doUserExists.roleType })
-                return res.status(200).send({ error : false, accessToken : token, email : doUserExists.email, role : doUserExists.roleType  })
+                return res.status(200).json({ error : false, accessToken : token, email : doUserExists.email, role : doUserExists.roleType  })
             }
             else{
                 throw new Error("User do not exists")
             }
         }
         catch(e : any){
-            return res.status(500).send({ error : true, message : e.message })
+            return res.status(500).json({ error : true, message : e.message })
         }
     }
 
@@ -50,14 +50,14 @@ class AuthController{
             const userCreated = await prisma.user.createMany({data : [{ email : email, password : hashingPassword(password), roleType : role}]})
             
             if(userCreated.count>=1){
-                return res.status(200).send({ error : false, message : "User created successfully" })
+                return res.status(200).json({ error : false, message : "User created successfully" })
             }
             else {
                 throw new Error("Cannot create user")
             }
         }   
         catch(e : any){
-            return res.status(500).send({ error : true, message : e.message })
+            return res.status(500).json({ error : true, message : e.message })
         }         
 
     }
@@ -73,7 +73,7 @@ class AuthController{
                 case "register" : 
                 AuthController.register(res, email, password)
                 break;
-                default : return res.status(500).send({ error : true, message : "Invalid query scope" })
+                default : return res.status(500).json({ error : true, message : "Invalid query scope" })
             }
     }
 

@@ -29,15 +29,15 @@ export interface User {
 }
 
 export interface Post { 
-    id : number;
-    title : string;
-    isDeleted : boolean;
-    description :  string;
-    imageSrc : string;
-    user? : User;
-    user_id? : number;
-    createdAt? : Date;
-    updatedAt? : Date;
-    deletedAt? : Date;
-    deletedBy? : string;
+    id: number;
+    title: string;
+    isDeleted: boolean;
+    description: string;
+    imageSrc: string;
+    user?: User;
+    user_id?: string;
+    createdAt?: Date | null | undefined;
+    updatedAt?: Date | null;
+    deletedAt?: Date | null;
+    deletedBy?: string;
 }

@@ -36,14 +36,14 @@ CREATE TABLE `User` (
 
 -- CreateTable
 CREATE TABLE `Post` (
-    `id` INTEGER NOT NULL,
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
     `title` VARCHAR(191) NOT NULL,
     `isDeleted` BOOLEAN NOT NULL DEFAULT false,
     `description` VARCHAR(1000) NOT NULL,
     `imageSrc` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updatedAt` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `deletedAt` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NULL,
+    `deletedAt` DATETIME(3) NULL,
     `deletedBy` VARCHAR(191) NULL,
     `user_id` VARCHAR(191) NOT NULL,
 

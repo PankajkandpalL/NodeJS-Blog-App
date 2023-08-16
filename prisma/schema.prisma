@@ -38,14 +38,14 @@ model User {
 }
 
 model Post {
-  id          Int       @id @unique
+  id          Int       @id @unique @default(autoincrement())
   title       String
   isDeleted   Boolean   @default(false)
   description String    @db.VarChar(1000)
   imageSrc    String
   createdAt   DateTime? @default(now())
-  updatedAt   DateTime? @default(now())
-  deletedAt   DateTime? @default(now())
+  updatedAt   DateTime?
+  deletedAt   DateTime?
   deletedBy   String?
   user        User      @relation(fields: [user_id], references: [email])
   user_id     String

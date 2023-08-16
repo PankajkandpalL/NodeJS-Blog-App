@@ -1,5 +1,5 @@
 import bcryptjs from "bcryptjs";
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 import { env } from 'process';
 import { prisma } from "..";
 import { Permission, Role } from "./types";
@@ -29,7 +29,7 @@ const hashingPassword = (password: string) => {
   return hash;
 };
 
-const getUserByToken = (accessToken: string) => {
+const getUserByToken = (accessToken: string)  => {
   if (accessToken) {
     try {
       return jwt.verify(accessToken, jwt_secret);
